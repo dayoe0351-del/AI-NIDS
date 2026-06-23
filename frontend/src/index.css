@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-tactical-dark text-tactical-text antialiased font-mono overflow-x-hidden;
+    background-image: 
+      linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  ::selection {
+    @apply bg-tactical-neon text-black;
+  }
+}
+
+@layer utilities {
+  .hud-panel {
+    @apply bg-tactical-panel border border-tactical-border relative overflow-hidden;
+  }
+  .hud-panel::before {
+    content: '';
+    @apply absolute inset-0 bg-scanlines pointer-events-none opacity-50 z-10;
+  }
+  .hud-border {
+    @apply border border-tactical-neon/30 shadow-[0_0_10px_rgba(0,255,65,0.1)];
+  }
+  .hud-text-glow {
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+  }
+  .hud-text-alert {
+    text-shadow: 0 0 5px rgba(255, 0, 60, 0.7);
+  }
+
+  /* Custom sharp scrollbar */
+  .tactical-scroll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .tactical-scroll::-webkit-scrollbar-track {
+    @apply bg-tactical-dark border-l border-tactical-border;
+  }
+  .tactical-scroll::-webkit-scrollbar-thumb {
+    @apply bg-tactical-neon/40 hover:bg-tactical-neon;
+  }
+}
