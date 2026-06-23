@@ -8,10 +8,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Username, Email, Password, Role, Department
         users_data = [
-            ('admin', 'admin@cuniversity.edu', 'adminpass123', 'SUPER_ADMIN', 'Security Operations'),
-            ('analyst', 'analyst@cuniversity.edu', 'analystpass123', 'ANALYST', 'Threat Analysis'),
-            ('operator', 'operator@cuniversity.edu', 'operatorpass123', 'OPERATOR', 'SOC Operations'),
-            ('viewer', 'viewer@cuniversity.edu', 'viewerpass123', 'VIEWER', 'Compliance'),
+            ('admin', 'admin@cuniversity.edu', 'admin123', 'SUPER_ADMIN', 'Security Operations'),
+            ('analyst', 'analyst@cuniversity.edu', 'analyst123', 'ANALYST', 'Threat Analysis'),
+            ('operator', 'operator@cuniversity.edu', 'operator123', 'OPERATOR', 'SOC Operations'),
+            ('viewer', 'viewer@cuniversity.edu', 'viewer123', 'VIEWER', 'Compliance'),
         ]
 
         for username, email, password, role, dept in users_data:
