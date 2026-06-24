@@ -5,6 +5,17 @@ const api = axios.create({
   timeout: 5000,
 });
 
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('ainids_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 export const fetchIncidents = () => api.get('/incidents/');
 export const fetchFlows = () => api.get('/flows/');
 export const fetchResponses = () => api.get('/responses/');

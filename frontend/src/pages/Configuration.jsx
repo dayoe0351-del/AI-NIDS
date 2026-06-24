@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import { Settings, RefreshCw, Users, ShieldCheck, Lock, Network, Database, Bell, ChevronDown, ChevronUp, Trash2, Edit2, Check, X } from 'lucide-react';
 
@@ -197,8 +197,8 @@ export default function Configuration() {
     setLoading(true);
     try {
       const [cRes, uRes] = await Promise.all([
-        axios.get('http://localhost:8000/api/v1/config/'),
-        axios.get('http://localhost:8000/api/v1/users/'),
+        api.get('/config/'),
+        api.get('/users/'),
       ]);
       setConfigs(cRes.data.results ?? cRes.data);
       setUsers(uRes.data.results ?? uRes.data);
@@ -211,20 +211,20 @@ export default function Configuration() {
   useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleConfigSave = async (id, value) => {
-    await axios.patch(`http://localhost:8000/api/v1/config/${id}/`, { value });
+    await api.patch(`/config/${id}/`, { value });
     setConfigs(prev => prev.map(c => c.id === id ? { ...c, value } : c));
     showToast('Configuration saved');
   };
 
   const handleRoleChange = async (id, role) => {
-    await axios.patch(`http://localhost:8000/api/v1/users/${id}/`, { role });
+    await api.patch(`/users/${id}/`, { role });
     setUsers(prev => prev.map(u => u.id === id ? { ...u, profile: { ...u.profile, role } } : u));
     showToast('Role updated');
   };
 
   const handleDeleteUser = async (id) => {
     if (!confirm('Delete this user?')) return;
-    await axios.delete(`http://localhost:8000/api/v1/users/${id}/`);
+    await api.delete(`/users/${id}/`);
     setUsers(prev => prev.filter(u => u.id !== id));
     showToast('User deleted');
   };

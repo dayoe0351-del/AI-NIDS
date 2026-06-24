@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api, { fetchResponses } from '../api';
 import { useLiveFeed } from '../hooks/useLiveFeed';
-import { fetchResponses } from '../api';
 import { RefreshCw, WifiOff, ArrowUp, RotateCcw, Check } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -42,7 +41,7 @@ export default function ResponseLog() {
   const doAction = async (id, action) => {
     setWorking(id + action);
     try {
-      await axios.post(`http://localhost:8000/api/v1/responses/${id}/${action}/`);
+      await api.post(`/responses/${id}/${action}/`);
       showToast(`${action === 'rollback' ? 'Rolled back' : 'Escalated'} successfully`);
     } catch {
       showToast('Action failed');
